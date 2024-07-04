@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (await loggedin) {
       successTrigger?.fire();
       Future.delayed(const Duration(seconds: 2), () {
-        context.push('/homepage');
+        context.push('/mainpage');
       });
     } else {
       failTrigger?.fire();

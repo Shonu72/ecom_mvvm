@@ -25,7 +25,7 @@ class Helper {
     prefs.setBool(key, value);
   }
 
-  static saveApiToken({required String key})async{
+  static saveApiToken({required String key}) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setString("apiToken", key);
   }
