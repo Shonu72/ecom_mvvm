@@ -1,8 +1,10 @@
-import 'package:ecom_mvvm/presentation/views/Auth/login_screen.dart';
+import 'package:ecom_mvvm/di/injection.dart';
+import 'package:ecom_mvvm/services/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
+  DependencyInjector.inject();
 }
 
 class MyApp extends StatelessWidget {
@@ -11,14 +13,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Ecommerce',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      routerConfig: router,
+      // home: const LoginScreen(),
     );
   }
 }

@@ -1,9 +1,12 @@
 import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/core/utils/helpers.dart';
+import 'package:ecom_mvvm/presentation/getx/controllers/auth_controller.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rive/rive.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,9 +24,12 @@ class _LoginScreenState extends State<LoginScreen> {
   SMINumber? numLook;
 
   StateMachineController? stateMachineController;
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isLoading = false;
+  final _formKey = GlobalKey<FormState>();
+
+  AuthController authController = Get.find<AuthController>();
 
   @override
   void initState() {
@@ -76,25 +82,31 @@ class _LoginScreenState extends State<LoginScreen> {
     numLook?.change(val.length.toDouble());
   }
 
-  void login() {
+  void login() async {
     setState(() {
       isLoading = true;
     });
     isChecking?.change(false);
     isHandsUp?.change(false);
-    if (_emailController.text == "admin" &&
-        _passwordController.text == "admin") {
+    Future<bool> loggedin = authController.loginUser(
+        username: _usernameController.text, password: _passwordController.text);
+    if (await loggedin) {
       successTrigger?.fire();
       Future.delayed(const Duration(seconds: 2), () {
-        // Navigator.push(
-        //     context, MaterialPageRoute(builder: (_) => const DemoScreen()));
+        context.push('/homepage');
       });
     } else {
       failTrigger?.fire();
     }
+
     setState(() {
       isLoading = false;
     });
+  }
+
+  void error() {
+    failTrigger?.fire();
+    Helper.toast("Please enter valid details");
   }
 
   @override
@@ -135,13 +147,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             children: [
                               const SizedBox(height: 15),
                               CustomTextField(
-                                controller: _emailController,
+                                controller: _usernameController,
                                 hintText: "Username",
                                 onChanged: () => moveEyeBalls,
                                 prefixIcon: const Icon(Icons.person),
                                 obscureText: false,
                                 ontap: lookOnTheTextField,
                                 keyboardType: TextInputType.emailAddress,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "Please enter username";
+                                  }
+                                  return null;
+                                },
                               ),
                               const SizedBox(height: 15),
                               CustomTextField(
@@ -151,6 +169,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 obscureText: true,
                                 ontap: handsOnTheEyes,
                                 keyboardType: TextInputType.visiblePassword,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "Please enter password";
+                                  }
+                                  return null;
+                                },
                               ),
                               const SizedBox(height: 15),
                               Row(
@@ -177,7 +201,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                           ),
                                         )
                                       : ElevatedButton(
-                                          onPressed: login,
+                                          onPressed: () {
+                                            Helper.validateField(
+                                                            _usernameController
+                                                                .text) ==
+                                                        null &&
+                                                    Helper.validateField(
+                                                            _passwordController
+                                                                .text) ==
+                                                        null
+                                                ? login()
+                                                : error();
+                                          },
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: primaryColor,
                                           ),
@@ -195,7 +230,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 children: [
                                   const Text("Don't have an account? "),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      context.push('/register');
+                                    },
                                     child: const Text(
                                       "Register Now",
                                       style: TextStyle(
@@ -223,17 +260,17 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.only(top:50),
+                padding: EdgeInsets.only(top: 50),
                 child: Positioned(
                     // top: 70,
                     // right: 20,
                     // left: 150,
                     child: AppText(
-                      text: "hCommerce - Login",
-                      size: 20,
-                      color: primaryColor,
-                      fontWeight: FontWeight.bold,
-                    )),
+                  text: "hCommerce - Login",
+                  size: 20,
+                  color: primaryColor,
+                  fontWeight: FontWeight.bold,
+                )),
               ),
             ],
           ),

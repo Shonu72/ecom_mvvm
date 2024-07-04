@@ -4,6 +4,7 @@ import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rive/rive.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -24,6 +25,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isLoading = false;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -76,7 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     numLook?.change(val.length.toDouble());
   }
 
-  void login() {
+  void register() {
     setState(() {
       isLoading = true;
     });
@@ -142,6 +144,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 obscureText: false,
                                 ontap: lookOnTheTextField,
                                 keyboardType: TextInputType.emailAddress,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "Please enter username";
+                                  }
+                                  return null;
+                                },
                               ),
                               const SizedBox(height: 15),
                               CustomTextField(
@@ -151,6 +159,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 obscureText: true,
                                 ontap: handsOnTheEyes,
                                 keyboardType: TextInputType.visiblePassword,
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "Please enter password";
+                                  }
+                                  return null;
+                                },
                               ),
                               const SizedBox(height: 15),
                               Row(
@@ -177,7 +191,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           ),
                                         )
                                       : ElevatedButton(
-                                          onPressed: login,
+                                          onPressed: () {
+                                            Helper.validateField(
+                                                            _emailController
+                                                                .text) ==
+                                                        null &&
+                                                    Helper.validateField(
+                                                            _passwordController
+                                                                .text) ==
+                                                        null
+                                                ? register()
+                                                : Helper.toast(
+                                                    "Please enter valid details");
+                                          },
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: primaryColor,
                                           ),
@@ -195,7 +221,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 children: [
                                   const Text("Already have an account? "),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      context.push('/');
+                                    },
                                     child: const Text(
                                       "Login Now",
                                       style: TextStyle(
