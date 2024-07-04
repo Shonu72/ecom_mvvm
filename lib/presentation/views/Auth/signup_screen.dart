@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rive/rive.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   late String animationURL;
   Artboard? _teddyArtboard;
   SMITrigger? successTrigger, failTrigger;
@@ -181,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: primaryColor,
                                           ),
-                                          child: const Text("Login",
+                                          child: const Text("Register",
                                               style: TextStyle(
                                                   color: Colors.white)),
                                         ),
@@ -193,11 +193,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text("Don't have an account? "),
+                                  const Text("Already have an account? "),
                                   TextButton(
                                     onPressed: () {},
                                     child: const Text(
-                                      "Register Now",
+                                      "Login Now",
                                       style: TextStyle(
                                         color: secondaryColor,
                                       ),
@@ -223,17 +223,17 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.only(top:50),
+                padding: EdgeInsets.only(top: 50),
                 child: Positioned(
                     // top: 70,
                     // right: 20,
                     // left: 150,
                     child: AppText(
-                      text: "hCommerce - Login",
-                      size: 20,
-                      color: primaryColor,
-                      fontWeight: FontWeight.bold,
-                    )),
+                  text: "hCommerce - Register",
+                  size: 20,
+                  color: primaryColor,
+                  fontWeight: FontWeight.bold,
+                )),
               ),
             ],
           ),
