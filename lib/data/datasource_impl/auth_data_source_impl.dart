@@ -15,23 +15,21 @@ class AuthDataSourceImpl implements AuthDataSource {
   Future<Either<Failure, Map<String, dynamic>>> login(
       String username, String password) async {
     try {
-      try {
-        final response =
-            await Helper.sendRequest(RequestType.post, ApiString.login, data: {
-          'username': username,
-          'password': password,
-        });
+      final response =
+          await Helper.sendRequest(RequestType.post, ApiString.login, data: {
+        'username': username,
+        'password': password,
+      });
 
-        if (response.statusCode == 200) {
-          return Right(response.data);
-        } else {
-          return Left(ServerFailure(
-              message: response.data['message'] ??
-                  'Server error with status code: ${response.statusCode}'));
-        }
-      } on ServerException catch (e) {
-        return Left(ServerFailure(message: e.message!));
+      if (response.statusCode == 200) {
+        return Right(response.data);
+      } else {
+        return Left(ServerFailure(
+            message: response.data['message'] ??
+                'Server error with status code: ${response.statusCode}'));
       }
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message!));
     } catch (e) {
       return Left(ServerFailure(message: 'Unexpected error: $e'));
     }

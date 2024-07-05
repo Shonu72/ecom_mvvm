@@ -1,5 +1,5 @@
 import 'package:ecom_mvvm/core/themes/colors.dart';
-import 'package:ecom_mvvm/presentation/views/products/home.dart';
+import 'package:ecom_mvvm/presentation/views/products/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -14,7 +14,7 @@ class _MainPageState extends State<MainPage> {
   late int currentIndex;
 
   List pages = [
-    const HomePage(),
+    HomePage(),
     const Text('2'),
     const Text('3'),
     const Text('4'),
