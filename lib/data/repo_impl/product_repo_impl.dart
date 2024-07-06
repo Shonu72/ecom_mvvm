@@ -23,4 +23,16 @@ class ProductRepoImpl implements ProductRepository {
       String category) {
     return productDataSource.fetchProductByCategory(category);
   }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> sortProductByPrice(
+      String type) {
+    return productDataSource.sortProductByPrice(type);
+  }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> sortProductByCategoryPrice(
+      String category, String type) {
+    return productDataSource.sortProductByCategoryPrice(category, type);
+  }
 }

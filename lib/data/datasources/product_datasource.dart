@@ -6,4 +6,7 @@ abstract class ProductDataSource {
   Future<Either<Failure, Map<String, dynamic>>> getProductDetails(int id);
   Future<Either<Failure, Map<String, dynamic>>> fetchProductByCategory(
       String category);
+  Future<Either<Failure, Map<String, dynamic>>> sortProductByPrice(String type);
+  Future<Either<Failure, Map<String, dynamic>>> sortProductByCategoryPrice(
+      String category, String type);
 }

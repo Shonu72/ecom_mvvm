@@ -182,7 +182,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
       context: context,
       builder: (context) {
         return SizedBox(
-          height: 300,
+          height: 180,
           child: Column(
             children: [
               const Center(
@@ -197,27 +197,31 @@ class _AllProductScreenState extends State<AllProductScreen> {
               Column(
                 children: [
                   ListTile(
-                    title: const Text("Rating"),
+                    title: const Text("Price: High to low"),
                     onTap: () {
                       Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: const Text("Review"),
-                    onTap: () {
-                      Navigator.pop(context);
+                      setState(() {
+                        if (_value == 0) {
+                          productController.sortByPrice("desc");
+                        } else {
+                          productController.sortByCategoryPrice(
+                              categoryTitles[_value], "desc");
+                        }
+                      });
                     },
                   ),
                   ListTile(
                     title: const Text("Price: Low to High"),
                     onTap: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  ListTile(
-                    title: const Text("Price: High to Low"),
-                    onTap: () {
-                      Navigator.pop(context);
+                      setState(() {
+                        Navigator.pop(context);
+                        if (_value == 0) {
+                          productController.sortByPrice("aesc");
+                        } else {
+                          productController.sortByCategoryPrice(
+                              categoryTitles[_value], "aesc");
+                        }
+                      });
                     },
                   ),
                 ],

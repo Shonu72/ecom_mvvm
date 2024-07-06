@@ -12,6 +12,8 @@ import 'package:ecom_mvvm/domain/usecases/fetch_by_category_usecase.dart';
 import 'package:ecom_mvvm/domain/usecases/get_product_usecase.dart';
 import 'package:ecom_mvvm/domain/usecases/login_usecase.dart';
 import 'package:ecom_mvvm/domain/usecases/product_details_usecase.dart';
+import 'package:ecom_mvvm/domain/usecases/sort_by_category_price.dart';
+import 'package:ecom_mvvm/domain/usecases/sort_by_price_usecase.dart';
 import 'package:ecom_mvvm/presentation/getx/bindings/auth_binding.dart';
 import 'package:ecom_mvvm/presentation/getx/bindings/product_binding.dart';
 import 'package:get/get.dart';
@@ -56,5 +58,7 @@ class DependencyInjector {
     Get.lazyPut(() => GetProductUsecase(productRepository));
     Get.lazyPut(() => ProductDetailsUsecase(productRepository));
     Get.lazyPut(() => FetchByCategoryUsecase(productRepository));
+    Get.lazyPut(() => SortByPriceUsecase(productRepository));
+    Get.lazyPut(() => SortByCateogryPriceUsecase(productRepository));
   }
 }
