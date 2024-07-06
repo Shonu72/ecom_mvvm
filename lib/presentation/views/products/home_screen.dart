@@ -171,7 +171,6 @@ class _HomePageState extends State<HomePage> {
                           );
                         },
                       );
-                    
                     },
                     staggeredTileBuilder: (index) => const StaggeredTile.fit(1),
                   );

@@ -4,18 +4,18 @@ import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:get/get.dart';
 
-class ProductTile extends StatelessWidget {
+class WishlistTile extends StatelessWidget {
   final ProductModel product;
-  final VoidCallback ontap;
-  ProductTile(
+  final VoidCallback onTap;
+  WishlistTile(
     this.product,
-    this.ontap, {
+    this.onTap, {
     super.key,
   });
   final productController = Get.find<ProductController>();
   final cartController = Get.find<CartController>();
+
   @override
   Widget build(BuildContext context) {
     int rating = product.rating.rate.toInt();
@@ -31,11 +31,11 @@ class ProductTile extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: GestureDetector(
-                    onTap: ontap,
+                    onTap: onTap,
                     child: Image.network(
                       product.image,
-                      height: 130,
-                      fit: BoxFit.cover,
+                      height: 250,
+                      fit: BoxFit.contain,
                       width: double.maxFinite,
                     ),
                   ),
@@ -44,18 +44,20 @@ class ProductTile extends StatelessWidget {
                   right: 10,
                   top: 10,
                   child: Obx(() {
-                    bool isInWishlist = cartController.isInWishlist(product);
+                    bool isInWishlist =
+                        cartController.wishlistItems.contains(product);
                     return IconButton(
                       onPressed: () {
                         cartController.toggleWishlist(product);
                       },
                       icon: Icon(
-                        isInWishlist ? Icons.favorite : Icons.favorite_border,
+                        isInWishlist ? Icons.cancel : Icons.favorite_border,
                         color: Colors.red,
+                        size: 30,
                       ),
                     );
                   }),
-                )
+                ),
               ],
             ),
             const SizedBox(height: 8),
@@ -69,7 +71,6 @@ class ProductTile extends StatelessWidget {
             ),
             Text(
               product.title,
-              // "Evening Dress",
               maxLines: 1,
               style: const TextStyle(
                   fontFamily: 'Rubik', fontWeight: FontWeight.w600),
@@ -77,7 +78,6 @@ class ProductTile extends StatelessWidget {
             ),
             Text(
               "\$ ${product.price}",
-              // "\$200",
               maxLines: 1,
               style: const TextStyle(
                   fontFamily: 'Rubik', fontWeight: FontWeight.w600),
@@ -88,24 +88,27 @@ class ProductTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                    style: ButtonStyle(
-                      minimumSize: WidgetStateProperty.all(const Size(170, 50)),
-                      backgroundColor: WidgetStateProperty.all(primaryColor),
-                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                  style: ButtonStyle(
+                    minimumSize: WidgetStateProperty.all(const Size(170, 40)),
+                    backgroundColor: WidgetStateProperty.all(primaryColor),
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () {
-                      cartController.addToCart(product);
-                    },
-                    child: const Text(
-                      "Add to Cart",
-                      style: TextStyle(color: Colors.white),
-                    )),
+                  ),
+                  onPressed: () {
+                    cartController.addToCart(product);
+                    cartController
+                        .toggleWishlist(product); // Remove from wishlist
+                  },
+                  child: const Text(
+                    "Move to Cart",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

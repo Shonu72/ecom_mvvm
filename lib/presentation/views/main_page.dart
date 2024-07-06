@@ -4,6 +4,7 @@ import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
 import 'package:ecom_mvvm/presentation/views/carts/cart_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/home_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/widgets/all_prodcts_screen.dart';
+import 'package:ecom_mvvm/presentation/views/wishlist/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +23,7 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const AllProductScreen(),
     const CartScreen(),
-    const Text('4'),
+    WishlistScreen(),
     const Text('5'),
   ];
 
