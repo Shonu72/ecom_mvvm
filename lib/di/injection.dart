@@ -8,6 +8,7 @@ import 'package:ecom_mvvm/data/repo_impl/auth_repo_impl.dart';
 import 'package:ecom_mvvm/data/repo_impl/product_repo_impl.dart';
 import 'package:ecom_mvvm/domain/repository/auth_repo.dart';
 import 'package:ecom_mvvm/domain/repository/product_repository.dart';
+import 'package:ecom_mvvm/domain/usecases/fetch_by_category_usecase.dart';
 import 'package:ecom_mvvm/domain/usecases/get_product_usecase.dart';
 import 'package:ecom_mvvm/domain/usecases/login_usecase.dart';
 import 'package:ecom_mvvm/domain/usecases/product_details_usecase.dart';
@@ -54,5 +55,6 @@ class DependencyInjector {
     Get.lazyPut(() => LoginUsecase(authRepository));
     Get.lazyPut(() => GetProductUsecase(productRepository));
     Get.lazyPut(() => ProductDetailsUsecase(productRepository));
+    Get.lazyPut(() => FetchByCategoryUsecase(productRepository));
   }
 }

@@ -17,4 +17,10 @@ class ProductRepoImpl implements ProductRepository {
   Future<Either<Failure, Map<String, dynamic>>> getProductDetails(int id) {
     return productDataSource.getProductDetails(id);
   }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> fetchProductByCategory(
+      String category) {
+    return productDataSource.fetchProductByCategory(category);
+  }
 }

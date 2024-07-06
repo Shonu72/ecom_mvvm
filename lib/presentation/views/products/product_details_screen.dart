@@ -16,17 +16,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   void initState() {
-    productController.productDetails(widget.productId);
+    // productController.productDetails(widget.productId);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    productController.productDetails(widget.productId);
-    // Find the product in the list using the product ID
+    // productController.productDetails(widget.productId);
     final product = productController.products.firstWhere(
       (p) => p.id == widget.productId,
     );
+    print(product);
 
     return Scaffold(
         appBar: AppBar(

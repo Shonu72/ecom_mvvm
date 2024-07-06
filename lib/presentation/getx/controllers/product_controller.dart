@@ -1,19 +1,23 @@
 import 'package:ecom_mvvm/core/utils/helpers.dart';
 import 'package:ecom_mvvm/data/models/product_model.dart';
+import 'package:ecom_mvvm/domain/usecases/fetch_by_category_usecase.dart';
 import 'package:ecom_mvvm/domain/usecases/get_product_usecase.dart';
 import 'package:ecom_mvvm/domain/usecases/product_details_usecase.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {
   final GetProductUsecase _getProductUsecase;
   final ProductDetailsUsecase _productDetailsUsecase;
+  final FetchByCategoryUsecase _fetchByCategoryUsecase;
 
   ProductController(
       {required GetProductUsecase getProductUsecase,
-      required ProductDetailsUsecase productDetailsUsecase})
+      required ProductDetailsUsecase productDetailsUsecase,
+      required FetchByCategoryUsecase fetchByCategoryUsecase})
       : _getProductUsecase = getProductUsecase,
-        _productDetailsUsecase = productDetailsUsecase;
+        _productDetailsUsecase = productDetailsUsecase,
+        _fetchByCategoryUsecase = fetchByCategoryUsecase;
 
   var isLoading = true.obs;
   final errorMessage = ''.obs;
@@ -21,8 +25,8 @@ class ProductController extends GetxController {
 
   Future<List<ProductModel>> getProducts() async {
     try {
-    isLoading(true);
-    debugPrint('Loading started');
+      isLoading(true);
+      debugPrint('Loading started');
       final failureOrSuccess = await _getProductUsecase();
       debugPrint('Request completed');
 
@@ -59,6 +63,7 @@ class ProductController extends GetxController {
         Helper.toast(errorMessage.value);
       }, (success) {
         products.value = success['products'];
+        isLoading(false);
         debugPrint('Products loaded: ${products.value}');
       });
     } catch (e) {
@@ -70,5 +75,32 @@ class ProductController extends GetxController {
       debugPrint('Loading ended');
     }
     return products;
+  }
+
+  Category? category;
+  Future<void> fetchProductByCategory(category) async {
+    try {
+      isLoading(true);
+      debugPrint('Loading started');
+      final failureOrSuccess = await _fetchByCategoryUsecase(category);
+      debugPrint('Request completed');
+
+      failureOrSuccess.fold((failure) {
+        errorMessage.value = Helper.convertFailureToMessage(failure);
+        debugPrint('Error: ${errorMessage.value}');
+        Helper.toast(errorMessage.value);
+      }, (success) {
+        products.value = success['products'];
+        isLoading(false);
+        debugPrint('Products loaded: ${products.value}');
+      });
+    } catch (e) {
+      errorMessage.value = 'Unexpected error: $e';
+      debugPrint('Catch error: ${errorMessage.value}');
+      Helper.toast(errorMessage.value);
+    } finally {
+      isLoading(false);
+      debugPrint('Loading ended');
+    }
   }
 }

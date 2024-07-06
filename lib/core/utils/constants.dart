@@ -5,6 +5,6 @@ class ApiString {
   static String products = "/products";
   static String categories = "/products/categories";
   static String sortalldesc = "/products?sort=desc";
-  static String sortbycategory = "/products/category";
+  static String fetchbycategory = "/products/category";
   static String addtocart = "/carts";
 }

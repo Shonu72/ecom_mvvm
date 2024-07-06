@@ -55,4 +55,28 @@ class ProductDatasourceImpl implements ProductDataSource {
       return Left(ServerFailure(message: 'Unexpected error: $e'));
     }
   }
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> fetchProductByCategory(
+      String category) async {
+    try {
+      final response = await Helper.sendRequest(
+          RequestType.get, '${ApiString.fetchbycategory}/$category');
+      if (response.statusCode == 200) {
+        final List<ProductModel> products = [];
+        for (var product in response.data) {
+          products.add(ProductModel.fromMap(product));
+        }
+        return Right({'products': products});
+      } else {
+        return Left(ServerFailure(
+            message: response.data['message'] ??
+                'Server error with status code: ${response.statusCode}'));
+      }
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message!));
+    } catch (e) {
+      return Left(ServerFailure(message: 'Unexpected error: $e'));
+    }
+  }
 }

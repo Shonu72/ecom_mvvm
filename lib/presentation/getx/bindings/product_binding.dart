@@ -1,3 +1,4 @@
+import 'package:ecom_mvvm/domain/usecases/fetch_by_category_usecase.dart';
 import 'package:ecom_mvvm/domain/usecases/get_product_usecase.dart';
 import 'package:ecom_mvvm/domain/usecases/product_details_usecase.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/product_controller.dart';
@@ -8,9 +9,14 @@ class ProductBinding extends Bindings {
   void dependencies() {
     final productUseCase = Get.find<GetProductUsecase>();
     final productDetailsUsecase = Get.find<ProductDetailsUsecase>();
+    final fetchByCategoryUsecase = Get.find<FetchByCategoryUsecase>();
 
-    Get.lazyPut(() => ProductController(
+    Get.lazyPut(
+      () => ProductController(
         getProductUsecase: productUseCase,
-        productDetailsUsecase: productDetailsUsecase));
+        productDetailsUsecase: productDetailsUsecase,
+        fetchByCategoryUsecase: fetchByCategoryUsecase,
+      ),
+    );
   }
 }

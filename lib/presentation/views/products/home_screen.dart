@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/product_controller.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
@@ -8,7 +9,6 @@ import 'package:ecom_mvvm/presentation/views/products/widgets/product_tile.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,14 +32,33 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const AppText(text: 'hCommerce'),
+        title: const AppText(
+          text: 'hCommerce',
+          fontWeight: FontWeight.bold,
+          color: primaryColor,
+        ),
+        centerTitle: true,
         leading: IconButton(
           onPressed: () {},
           icon: const Icon(
             Icons.document_scanner_outlined,
             size: 30,
+            color: primaryColor,
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.search,
+                size: 30,
+                color: primaryColor,
+              ),
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -117,30 +136,42 @@ class _HomePageState extends State<HomePage> {
                 } else {
                   return StaggeredGridView.countBuilder(
                     crossAxisCount: 2,
-                    itemCount:
-                        productController.products.length, // Fixed itemCount
+                    itemCount: 2,
                     crossAxisSpacing: 5,
                     mainAxisSpacing: 5,
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return ProductTile(
-                        productController.products[index],
-                        () {
-                          // context.pushNamed(
-                          //   'productdetails',
-                          //   pathParameters: {
-                          //     'id': productController.products[index].id
-                          //         .toString()
-                          //   },
-                          // );
-
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return ProductDetailsScreen(
-                              productId: productController.products[index].id,
-                            );
-                          }));
+                      // context.pushNamed(
+                      //   'productdetails',
+                      //   pathParameters: {
+                      //     'id': productController.products[index].id
+                      //         .toString()
+                      //   },
+                      // );
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) {
+                      //   return ProductDetailsScreen(
+                      //     productId: productController.products[index].id,
+                      //   );
+                      // }));
+                      return OpenContainer(
+                        transitionType: ContainerTransitionType.fade,
+                        transitionDuration: const Duration(milliseconds: 300),
+                        closedBuilder: (context, action) {
+                          return ProductTile(
+                            productController.products[index],
+                            action,
+                          );
+                        },
+                        openBuilder: (context, action) {
+                          return ProductDetailsScreen(
+                            productId: productController.products[index].id,
+                          );
                         },
                       );
+                    
                     },
                     staggeredTileBuilder: (index) => const StaggeredTile.fit(1),
                   );
@@ -182,20 +213,43 @@ class _HomePageState extends State<HomePage> {
                 } else {
                   return StaggeredGridView.countBuilder(
                     crossAxisCount: 2,
-                    itemCount:
-                        productController.products.length, // Fixed itemCount
+                    itemCount: 2,
                     crossAxisSpacing: 5,
                     mainAxisSpacing: 5,
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return ProductTile(
-                        productController.products[index],
-                        () {
-                          context.pushNamed(
-                            'productdetails',
-                            pathParameters: {
-                              'id': productController.products[index].id
-                                  .toString()
-                            },
+                      // return ProductTile(
+                      //   productController.products[index + 2],
+                      //   () {
+                      //     // context.pushNamed(
+                      //     //   'productdetails',
+                      //     //   pathParameters: {
+                      //     //     'id': productController.products[index].id
+                      //     //         .toString()
+                      //     //   },
+                      //     // );
+                      //     Navigator.push(context,
+                      //         MaterialPageRoute(builder: (context) {
+                      //       return ProductDetailsScreen(
+                      //         productId: productController.products[index].id,
+                      //       );
+                      //     }));
+                      //   },
+                      // );
+                      return OpenContainer(
+                        transitionType: ContainerTransitionType.fade,
+                        transitionDuration: const Duration(milliseconds: 300),
+                        closedBuilder: (context, action) {
+                          return ProductTile(
+                            productController.products[index + 2],
+                            action,
+                          );
+                        },
+                        openBuilder: (context, action) {
+                          return ProductDetailsScreen(
+                            productId: productController.products[index + 2].id,
                           );
                         },
                       );

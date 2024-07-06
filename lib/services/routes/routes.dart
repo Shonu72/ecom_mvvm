@@ -4,6 +4,7 @@ import 'package:ecom_mvvm/presentation/views/Auth/signup_screen.dart';
 import 'package:ecom_mvvm/presentation/views/main_page.dart';
 import 'package:ecom_mvvm/presentation/views/products/home_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/product_details_screen.dart';
+import 'package:ecom_mvvm/presentation/views/products/widgets/all_prodcts_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
@@ -40,7 +41,7 @@ final router = GoRouter(
       GoRoute(
         name: 'homepage',
         path: '/homepage',
-        builder: (context, state) => HomePage(),
+        builder: (context, state) => const HomePage(),
       ),
       GoRoute(
         name: 'productdetails',
@@ -48,6 +49,13 @@ final router = GoRouter(
         builder: (context, state) {
           final id = int.parse(state.pathParameters['id']!);
           return ProductDetailsScreen(productId: id);
+        },
+      ),
+      GoRoute(
+        name: 'allproducts',
+        path: '/allproducts',
+        builder: (context, state) {
+          return const AllProductScreen();
         },
       ),
     ]);
