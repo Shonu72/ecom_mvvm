@@ -1,7 +1,10 @@
 import 'package:ecom_mvvm/core/themes/colors.dart';
+import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/product_controller.dart';
+import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final int productId;
@@ -13,6 +16,7 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   final productController = Get.find<ProductController>();
+  final cartController = Get.find<CartController>();
 
   @override
   void initState() {
@@ -30,8 +34,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Product Details'),
-        ),
+            title: const AppText(
+                text: 'Product Details', color: primaryColor, size: 20),
+            centerTitle: true,
+            leading: IconButton(
+                onPressed: () {
+                  context.pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: primaryColor,
+                )),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.share,
+                  size: 24,
+                  color: primaryColor,
+                ),
+              ),
+            ]),
         body: Obx(() {
           if (productController.isLoading.value) {
             return const Center(
@@ -166,7 +189,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   ),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                cartController.addToCart(product);
+                              },
                               child: const Text(
                                 "Add to Cart",
                                 style: TextStyle(color: Colors.white),

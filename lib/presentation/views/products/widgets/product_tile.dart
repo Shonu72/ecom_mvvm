@@ -1,5 +1,6 @@
 import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/data/models/product_model.dart';
+import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ class ProductTile extends StatelessWidget {
     super.key,
   });
   final productController = Get.find<ProductController>();
+  final cartController = Get.find<CartController>();
   @override
   Widget build(BuildContext context) {
     int rating = product.rating.rate.toInt();
@@ -38,10 +40,15 @@ class ProductTile extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   right: 10,
                   top: 10,
-                  child: Icon(Icons.favorite_border, color: Colors.red),
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.favorite_border,
+                        color: Colors.red,
+                      )),
                 )
               ],
             ),
@@ -85,8 +92,7 @@ class ProductTile extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      // cartController.addToCart(productController.productList[
-                      //     productController.productList.indexOf(product)]);
+                      cartController.addToCart(product);
                     },
                     child: const Text(
                       "Add to Cart",
