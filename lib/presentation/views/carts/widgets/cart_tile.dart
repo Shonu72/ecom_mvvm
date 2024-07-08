@@ -1,9 +1,9 @@
 import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/data/models/product_model.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
+import 'package:ecom_mvvm/presentation/views/checkout/checkout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 
 class CartTile extends StatelessWidget {
   final ProductModel product;
@@ -104,7 +104,12 @@ class CartTile extends StatelessWidget {
                                   WidgetStateProperty.all(primaryColor),
                             ),
                             onPressed: () {
-                              context.push('/checkout');
+                              // context.push('/checkout');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const CheckoutPage()));
                             },
                             child: const Text(
                               'Buy Now',

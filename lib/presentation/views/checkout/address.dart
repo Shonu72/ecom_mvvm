@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:ecom_mvvm/core/themes/colors.dart';
+import 'package:ecom_mvvm/core/utils/helpers.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
+import 'package:ecom_mvvm/presentation/views/checkout/checkout_page.dart';
+import 'package:ecom_mvvm/services/database/database_operation.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -31,6 +34,7 @@ class _AddressPageState extends State<AddressPage> {
   String country = '';
 
   StreamController<LatLng> streamController = StreamController();
+  final DatabaseService _databaseService = DatabaseService();
 
   void fetchAddressDetail(LatLng location) async {
     List<Placemark> placemarks =
@@ -253,8 +257,37 @@ class _AddressPageState extends State<AddressPage> {
                   // side: const BorderSide(color: primaryColor),
                 ),
               ),
-              onPressed: () {
-                // Handle save address action
+              onPressed: () async {
+                final existingAddresses = await _databaseService.getAddresses();
+
+                if (existingAddresses.isNotEmpty) {
+                  // Address already exists, update it
+                  await _databaseService.updateAddress({
+                    'id': existingAddresses.first['id'],
+                    'addressTitle': addressTitle,
+                    'locality': locality,
+                    'city': city,
+                    'state': state,
+                    'pincode': pincode,
+                    'country': country,
+                  });
+                } else {
+                  // Address does not exist, insert it
+                  await _databaseService.insertAddress({
+                    'addressTitle': addressTitle,
+                    'locality': locality,
+                    'city': city,
+                    'state': state,
+                    'pincode': pincode,
+                    'country': country,
+                  });
+                }
+
+                Helper.toast('Address Saved');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CheckoutPage()),
+                );
               },
               child: const AppText(
                 text: 'Save Address',
