@@ -1,6 +1,7 @@
 import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
+import 'package:ecom_mvvm/presentation/views/products/product_details_screen.dart';
 import 'package:ecom_mvvm/presentation/views/wishlist/widgets/wishlist_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -42,8 +43,9 @@ class WishlistScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               final product = cartController.wishlistItems[index];
               return WishlistTile(product, () {
-                cartController.addToCart(product);
-                cartController.toggleWishlist(product);
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ProductDetailsScreen(productId: product.id);
+                }));
               });
             },
             staggeredTileBuilder: (index) => const StaggeredTile.fit(1),

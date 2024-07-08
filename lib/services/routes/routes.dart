@@ -10,7 +10,7 @@ import 'package:go_router/go_router.dart';
 final router = GoRouter(
     redirect: (context, state) async {
       bool? isLoggedIn = await Helper.getUser(key: 'isLoggedIn');
-      const loggedInPath = '/mainpage';
+      const loggedInPath = '/mainpage:/index';
       if (isLoggedIn == true) {
         return loggedInPath;
       } else if (isLoggedIn == false && state.matchedLocation != '/') {
@@ -32,12 +32,13 @@ final router = GoRouter(
         builder: (context, state) => const SignUpScreen(),
       ),
       GoRoute(
-        name: 'mainpage',
-        path: '/mainpage',
-        builder: (context, state) => const MainPage(
-          initialIndex: 0,
-        ),
-      ),
+          name: 'mainpage',
+          path: '/mainpage:/index',
+          builder: (context, state) {
+            final initialIndex =
+                int.parse(state.queryParameters['index'] ?? '0');
+            return MainPage(initialIndex: initialIndex);
+          }),
       GoRoute(
         name: 'homepage',
         path: '/homepage',

@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/product_controller.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
+import 'package:ecom_mvvm/presentation/views/main_page.dart';
 import 'package:ecom_mvvm/presentation/views/products/product_details_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/widgets/categories.dart';
 import 'package:ecom_mvvm/presentation/views/products/widgets/image_slider.dart';
@@ -69,9 +70,9 @@ class _HomePageState extends State<HomePage> {
               thickness: 0.4,
             ),
             const ImageSlider(),
-            const Row(
+            Row(
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: 12, right: 12, top: 5),
                   child: Text(
                     'Categories',
@@ -81,18 +82,29 @@ class _HomePageState extends State<HomePage> {
                         fontFamily: 'Rubik'),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'View All',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: secondaryColor,
-                        fontFamily: 'Rubik'),
-                  ),
-                )
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                      onPressed: () {
+                        // context.pushNamed('mainpage', pathParameters: {
+                        //   'index': '1',
+                        // });
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const MainPage(initialIndex: 1);
+                        }));
+                      },
+                      child: const Text(
+                        'View All',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: secondaryColor,
+                          fontFamily: 'Rubik',
+                        ),
+                      ),
+                    ))
               ],
             ),
             const SizedBox(
@@ -101,9 +113,9 @@ class _HomePageState extends State<HomePage> {
             // ContainerList(),
             const ContainerList(),
             const SizedBox(height: 10),
-            const Row(
+            Row(
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: 12, right: 12, top: 5),
                   child: Text(
                     'Trending',
@@ -113,18 +125,29 @@ class _HomePageState extends State<HomePage> {
                         fontFamily: 'Rubik'),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'View All',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: secondaryColor,
-                        fontFamily: 'Rubik'),
-                  ),
-                )
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextButton(
+                      onPressed: () {
+                        // context.pushNamed('mainpage', pathParameters: {
+                        //   'index': '1',
+                        // });
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const MainPage(initialIndex: 1);
+                        }));
+                      },
+                      child: const Text(
+                        'View All',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: secondaryColor,
+                          fontFamily: 'Rubik',
+                        ),
+                      ),
+                    ))
               ],
             ),
             const SizedBox(height: 5),
@@ -177,20 +200,32 @@ class _HomePageState extends State<HomePage> {
                 }
               }),
             ),
-            const Row(
+            Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 12, right: 12, top: 5),
-                  child: Text(
-                    'Sales',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Rubik'),
-                  ),
-                ),
-                Spacer(),
-                Padding(
+                    padding: const EdgeInsets.only(left: 12, right: 12, top: 5),
+                    child: TextButton(
+                      onPressed: () {
+                        // context.pushNamed('mainpage', pathParameters: {
+                        //   'index': '1',
+                        // });
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return const MainPage(initialIndex: 1);
+                        }));
+                      },
+                      child: const Text(
+                        'View All',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: secondaryColor,
+                          fontFamily: 'Rubik',
+                        ),
+                      ),
+                    )),
+                const Spacer(),
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     'View All',
