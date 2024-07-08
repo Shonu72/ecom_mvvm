@@ -1,6 +1,8 @@
 import 'package:ecom_mvvm/core/utils/helpers.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/login_screen.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/signup_screen.dart';
+import 'package:ecom_mvvm/presentation/views/checkout/address.dart';
+import 'package:ecom_mvvm/presentation/views/checkout/checkout_page.dart';
 import 'package:ecom_mvvm/presentation/views/main_page.dart';
 import 'package:ecom_mvvm/presentation/views/products/home_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/product_details_screen.dart';
@@ -58,5 +60,15 @@ final router = GoRouter(
         builder: (context, state) {
           return const AllProductScreen();
         },
+      ),
+      GoRoute(
+        name: 'address',
+        path: '/address',
+        builder: (context, state) =>  AddressPage(),
+      ),
+      GoRoute(
+        name: 'checkout',
+        path: '/checkout',
+        builder: (context, state) => const CheckoutPage(),
       ),
     ]);

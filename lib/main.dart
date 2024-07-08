@@ -1,3 +1,4 @@
+import 'package:ecom_mvvm/core/utils/helpers.dart';
 import 'package:ecom_mvvm/di/injection.dart';
 import 'package:ecom_mvvm/services/routes/routes.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(const MyApp());
   DependencyInjector.inject();
+  Helper.requestPermissions();
 }
 
 class MyApp extends StatelessWidget {

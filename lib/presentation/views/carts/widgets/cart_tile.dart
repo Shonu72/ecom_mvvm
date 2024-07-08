@@ -3,6 +3,7 @@ import 'package:ecom_mvvm/data/models/product_model.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class CartTile extends StatelessWidget {
   final ProductModel product;
@@ -103,7 +104,7 @@ class CartTile extends StatelessWidget {
                                   WidgetStateProperty.all(primaryColor),
                             ),
                             onPressed: () {
-                              // Implement navigation to the payment page
+                              context.push('/checkout');
                             },
                             child: const Text(
                               'Buy Now',

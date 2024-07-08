@@ -4,6 +4,7 @@ import 'package:ecom_mvvm/core/utils/exception.dart';
 import 'package:ecom_mvvm/core/utils/failure.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum RequestType { get, post, put }
@@ -91,5 +92,15 @@ class Helper {
       return failure.message;
     }
     return "Unknown error occurred";
+  }
+
+  static Future<void> requestPermissions() async {
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.location,
+    ].request();
+
+    if (statuses[Permission.location]!.isDenied) {
+      Helper.toast("Location required ");
+    }
   }
 }
