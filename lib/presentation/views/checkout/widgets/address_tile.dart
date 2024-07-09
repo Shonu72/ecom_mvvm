@@ -87,7 +87,7 @@ class _AddressTileState extends State<AddressTile> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const AppText(
-                    text: "John Doe",
+                    text: "David Morrison",
                     color: Colors.black,
                   ),
                   TextButton(

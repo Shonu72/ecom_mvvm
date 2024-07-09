@@ -1,15 +1,32 @@
 import 'package:ecom_mvvm/core/themes/colors.dart';
+import 'package:ecom_mvvm/presentation/getx/controllers/user_controller.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
 import 'package:ecom_mvvm/presentation/views/Profiles/payment_method.dart';
 import 'package:ecom_mvvm/presentation/views/Profiles/profile_widget.dart';
 import 'package:ecom_mvvm/presentation/views/Profiles/show_address_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final UserController userController = Get.find<UserController>();
+
+  @override
+  void initState() {
+    userController.fetchUsers(id: 2);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // userController.fetchUsers(id: 2 ?? 0);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -29,84 +46,94 @@ class ProfilePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 10, right: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 20),
-            ListTile(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              tileColor: Colors.white,
-              title: const AppText(
-                text: 'John Dow',
-                size: 20,
-                color: Colors.black,
-              ),
-              subtitle: const AppText(
-                text: 'abc@test.com',
-                size: 16,
-                color: Colors.black,
-              ),
-              leading: const CircleAvatar(
-                radius: 30,
-                backgroundColor: Colors.black,
-                backgroundImage: NetworkImage(
-                    'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg'),
-              ),
-            ),
-            const SizedBox(height: 30),
-            ProfileWidget(
-              title: 'My Orders',
-              subtitle: 'all orders',
-              ontap: () {},
-            ),
-            const SizedBox(height: 10),
-            ProfileWidget(
-              title: 'Shipping Addresses',
-              subtitle: 'show saved addresses',
-              ontap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ShowAddressScreen(),
+        child: Obx(
+          () {
+            final user = userController.userResponse.value;
+
+            // if (user == null) {
+            //   return const Center(child: CircularProgressIndicator());
+            // }
+
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                ListTile(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                );
-              },
-            ),
-            const SizedBox(height: 10),
-            ProfileWidget(
-              title: 'Payment Methods',
-              subtitle: 'saved payment system ',
-              ontap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ShowCardScreen(),
+                  tileColor: Colors.white,
+                  title: AppText(
+                    text: user?.username ?? 'mor_2314',
+                    size: 20,
+                    color: Colors.black,
                   ),
-                );
-              },
-            ),
-            const SizedBox(height: 10),
-            ProfileWidget(
-              title: 'Promocode & Offers',
-              subtitle: 'show latest promo codes',
-              ontap: () {},
-            ),
-            const SizedBox(height: 10),
-            ProfileWidget(
-              title: 'My Reviews',
-              subtitle: 'all reviews',
-              ontap: () {},
-            ),
-            const SizedBox(height: 10),
-            ProfileWidget(
-              title: 'Settings',
-              subtitle: 'Notification, Password..',
-              ontap: () {},
-            ),
-            const SizedBox(height: 10),
-          ],
+                  subtitle: AppText(
+                    text: user?.email ?? 'morrison@gmail.com',
+                    size: 16,
+                    color: Colors.black,
+                  ),
+                  leading: const CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.black,
+                    backgroundImage: NetworkImage(
+                        'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg'),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                ProfileWidget(
+                  title: 'My Orders',
+                  subtitle: 'all orders',
+                  ontap: () {},
+                ),
+                const SizedBox(height: 10),
+                ProfileWidget(
+                  title: 'Shipping Addresses',
+                  subtitle: 'show saved addresses',
+                  ontap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ShowAddressScreen(),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 10),
+                ProfileWidget(
+                  title: 'Payment Methods',
+                  subtitle: 'saved payment system ',
+                  ontap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ShowCardScreen(),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 10),
+                ProfileWidget(
+                  title: 'Promocode & Offers',
+                  subtitle: 'show latest promo codes',
+                  ontap: () {},
+                ),
+                const SizedBox(height: 10),
+                ProfileWidget(
+                  title: 'My Reviews',
+                  subtitle: 'all reviews',
+                  ontap: () {},
+                ),
+                const SizedBox(height: 10),
+                ProfileWidget(
+                  title: 'Settings',
+                  subtitle: 'Notification, Password..',
+                  ontap: () {},
+                ),
+                const SizedBox(height: 10),
+              ],
+            );
+          },
         ),
       ),
     );

@@ -8,10 +8,10 @@ class ShowCardScreen extends StatefulWidget {
   const ShowCardScreen({super.key});
 
   @override
-  _ShowCardScreenState createState() => _ShowCardScreenState();
+  ShowCardScreenState createState() => ShowCardScreenState();
 }
 
-class _ShowCardScreenState extends State<ShowCardScreen> {
+class ShowCardScreenState extends State<ShowCardScreen> {
   late Future<List<CardModel>> cards;
   int? selectedCardId;
 

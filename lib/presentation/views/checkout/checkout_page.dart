@@ -95,7 +95,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           size: 18),
                       const Spacer(),
                       AppText(
-                          text: '₹ $shippingCharges.0',
+                          text: '₹ $shippingCharges.00',
                           color: primaryColor,
                           size: 18),
                     ],
@@ -130,7 +130,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           text: 'Total', color: primaryColor, size: 18),
                       const Spacer(),
                       AppText(
-                          text: '₹ $totalAmount',
+                          text: '₹ ${totalAmount.toStringAsFixed(2)}',
                           color: primaryColor,
                           size: 18),
                     ],

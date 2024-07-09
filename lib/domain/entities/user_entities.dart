@@ -1,68 +1,119 @@
 import 'package:equatable/equatable.dart';
 
 class UserEntities extends Equatable {
-  final Address address;
+  // final Address address;
   final int id;
   final String email;
   final String username;
   final String password;
-  final Name name;
-  int v;
+  // final Name name;
+  final int v;
 
-  UserEntities({
-    required this.address,
+  const UserEntities({
+    // required this.address,
     required this.id,
     required this.email,
     required this.username,
     required this.password,
-    required this.name,
+    // required this.name,
     required this.v,
   });
 
   @override
   List<Object?> get props => [
-        address,
+        // address,
         id,
         email,
         username,
         password,
-        name,
+        // name,
         v,
       ];
 }
 
-class Address {
-  Geolocation geolocation;
-  String city;
-  String street;
-  int number;
-  String zipcode;
+// class Address {
+//   Geolocation geolocation;
+//   String city;
+//   String street;
+//   int number;
+//   String zipcode;
 
-  Address({
-    required this.geolocation,
-    required this.city,
-    required this.street,
-    required this.number,
-    required this.zipcode,
-  });
-}
+//   Address({
+//     required this.geolocation,
+//     required this.city,
+//     required this.street,
+//     required this.number,
+//     required this.zipcode,
+//   });
 
-class Geolocation {
-  String lat;
-  String long;
+//   Map<String, dynamic> toMap() {
+//     return {
+//       'geolocation': geolocation,
+//       'city': city,
+//       'street': street,
+//       'number': number,
+//       'zipcode': zipcode,
+//     };
+//   }
 
-  Geolocation({
-    required this.lat,
-    required this.long,
-  });
-}
+//   factory Address.fromMap(Map<String, dynamic> map) {
+//     return Address(
+//       geolocation: Geolocation(
+//         lat: map['geolocation']['lat'],
+//         long: map['geolocation']['long'],
+//       ),
+//       city: map['city'],
+//       street: map['street'],
+//       number: map['number'],
+//       zipcode: map['zipcode'],
+//     );
+//   }
+// }
 
-class Name {
-  String firstname;
-  String lastname;
+// class Geolocation {
+//   String lat;
+//   String long;
 
-  Name({
-    required this.firstname,
-    required this.lastname,
-  });
-}
+//   Geolocation({
+//     required this.lat,
+//     required this.long,
+//   });
+
+//   Map<String, dynamic> toMap() {
+//     return {
+//       'lat': lat,
+//       'long': long,
+//     };
+//   }
+
+//   factory Geolocation.fromMap(Map<String, dynamic> map) {
+//     return Geolocation(
+//       lat: map['lat'],
+//       long: map['long'],
+//     );
+//   }
+// }
+
+// class Name {
+//   String firstname;
+//   String lastname;
+
+//   Name({
+//     required this.firstname,
+//     required this.lastname,
+//   });
+
+//   Map<String, dynamic> toMap() {
+//     return {
+//       'firstname': firstname,
+//       'lastname': lastname,
+//     };
+//   }
+
+//   factory Name.fromMap(Map<String, dynamic> map) {
+//     return Name(
+//       firstname: map['firstname'],
+//       lastname: map['lastname'],
+//     );
+//   }
+// }
