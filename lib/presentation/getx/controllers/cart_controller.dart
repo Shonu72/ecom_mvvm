@@ -10,10 +10,13 @@ class CartController extends GetxController {
   double get totalPrice => cartItems.entries
       .fold(0, (sum, entry) => sum + entry.key.price * entry.value);
 
+  void clearCart() {
+    cartItems.clear();
+  }
+
   void addToCart(ProductModel item) {
     if (cartItems.containsKey(item)) {
       cartItems[item] = cartItems[item]! + 1;
-      
     } else {
       cartItems[item] = 1;
     }

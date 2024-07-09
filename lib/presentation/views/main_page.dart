@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
+import 'package:ecom_mvvm/presentation/views/Profiles/profile_page.dart';
 import 'package:ecom_mvvm/presentation/views/carts/cart_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/home_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/widgets/all_prodcts_screen.dart';
@@ -24,7 +25,7 @@ class _MainPageState extends State<MainPage> {
     const AllProductScreen(),
     const CartScreen(),
     WishlistScreen(),
-    const Text('5'),
+    const ProfilePage(),
   ];
 
   @override
