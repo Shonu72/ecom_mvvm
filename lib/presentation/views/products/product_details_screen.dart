@@ -21,7 +21,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   void initState() {
-    // productController.productDetails(widget.productId);
     super.initState();
   }
 

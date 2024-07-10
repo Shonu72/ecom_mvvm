@@ -89,7 +89,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ProfileWidget(
                   title: 'My Orders',
                   subtitle: 'all orders',
-                  ontap: () {},
+                  ontap: () {
+                    context.push('/orders');
+                  },
                 ),
                 const SizedBox(height: 10),
                 ProfileWidget(

@@ -1,5 +1,7 @@
 import 'package:ecom_mvvm/core/utils/helpers.dart';
+import 'package:ecom_mvvm/data/models/order_model.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
+import 'package:ecom_mvvm/presentation/getx/controllers/order_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -18,6 +20,8 @@ class PaymentHelper {
   }
 
   final CartController cartController = Get.find<CartController>();
+  final OrderController orderController = Get.find<OrderController>();
+
   void openCheckout(double amount) {
     var options = {
       'key': 'rzp_test_1DP5mmOlF5G5ag',
@@ -39,11 +43,19 @@ class PaymentHelper {
   void handlePaymentSuccess(PaymentSuccessResponse response) {
     debugPrint('Payment success');
     Helper.toast("Payment Success: ${response.paymentId!}");
-    cartController.clearCart();
     // Navigator.push(context,
     //     MaterialPageRoute(builder: (context) => const OrderSuccessScreen()));
-
     context.push('/ordersuccess');
+
+    final order = OrderModel(
+      id: response.paymentId!,
+      products: cartController.cartItems.keys.toList(),
+      totalAmount: cartController.totalPrice,
+      date: DateTime.now(),
+    );
+
+    orderController.addOrder(order);
+    cartController.clearCart();
   }
 
   void handlePaymentError(PaymentFailureResponse response) {

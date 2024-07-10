@@ -13,10 +13,10 @@ class AllProductScreen extends StatefulWidget {
   const AllProductScreen({super.key});
 
   @override
-  _AllProductScreenState createState() => _AllProductScreenState();
+  AllProductScreenState createState() => AllProductScreenState();
 }
 
-class _AllProductScreenState extends State<AllProductScreen> {
+class AllProductScreenState extends State<AllProductScreen> {
   final ProductController productController = Get.find<ProductController>();
   int _value = 0;
 

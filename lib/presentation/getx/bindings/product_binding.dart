@@ -4,6 +4,7 @@ import 'package:ecom_mvvm/domain/usecases/product_details_usecase.dart';
 import 'package:ecom_mvvm/domain/usecases/sort_by_category_price.dart';
 import 'package:ecom_mvvm/domain/usecases/sort_by_price_usecase.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
+import 'package:ecom_mvvm/presentation/getx/controllers/order_controller.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/product_controller.dart';
 import 'package:get/get.dart';
 
@@ -27,5 +28,6 @@ class ProductBinding extends Bindings {
     );
 
     Get.lazyPut(() => CartController());
+    Get.lazyPut(() => OrderController());
   }
 }

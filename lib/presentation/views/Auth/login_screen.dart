@@ -35,6 +35,11 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     animationURL = "assets/login.riv";
+    _initializeRive();
+  }
+
+  Future<void> _initializeRive() async {
+    await RiveFile.initialize();
     rootBundle.load(animationURL).then(
       (data) {
         final file = RiveFile.import(data);
@@ -96,16 +101,10 @@ class _LoginScreenState extends State<LoginScreen> {
         context.pushNamed('mainpage', pathParameters: {
           'initialIndex': '0',
         });
-        // Navigator.push(context, MaterialPageRoute(builder: (context) {
-        //   return const MainPage(
-        //     initialIndex: 0,
-        //   );
-        // }));
       });
     } else {
       failTrigger?.fire();
     }
-
     setState(() {
       isLoading = false;
     });
@@ -136,7 +135,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         fit: BoxFit.fitWidth,
                       ),
                     ),
-                  // const Text("ABCD"),
                   Container(
                     alignment: Alignment.center,
                     width: 400,
@@ -259,27 +257,18 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          const Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 50),
-                child: Positioned(
-                    // top: 70,
-                    // right: 20,
-                    // left: 150,
-                    child: AppText(
-                  text: "hCommerce - Login",
-                  size: 20,
-                  color: primaryColor,
-                  fontWeight: FontWeight.bold,
-                )),
+          const Positioned(
+            top: 50,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: AppText(
+                text: "hCommerce - Login",
+                size: 20,
+                color: primaryColor,
+                fontWeight: FontWeight.bold,
               ),
-            ],
+            ),
           ),
         ],
       ),

@@ -7,6 +7,7 @@ import 'package:ecom_mvvm/presentation/views/checkout/address.dart';
 import 'package:ecom_mvvm/presentation/views/checkout/checkout_page.dart';
 import 'package:ecom_mvvm/presentation/views/checkout/order_success_screen.dart';
 import 'package:ecom_mvvm/presentation/views/main_page.dart';
+import 'package:ecom_mvvm/presentation/views/order/orders_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/home_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/product_details_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/widgets/all_prodcts_screen.dart';
@@ -75,6 +76,11 @@ final router = GoRouter(
         name: 'checkout',
         path: '/checkout',
         builder: (context, state) => const CheckoutPage(),
+      ),
+      GoRoute(
+        name: 'orders',
+        path: '/orders',
+        builder: (context, state) => OrdersScreen(),
       ),
       GoRoute(
         name: 'ordersuccess',

@@ -1,9 +1,11 @@
 import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/core/utils/helpers.dart';
+import 'package:ecom_mvvm/presentation/getx/controllers/auth_controller.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rive/rive.dart';
 
@@ -22,15 +24,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
   SMINumber? numLook;
 
   StateMachineController? stateMachineController;
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool isLoading = false;
   final _formKey = GlobalKey<FormState>();
+
+  AuthController authController = Get.find<AuthController>();
 
   @override
   void initState() {
     super.initState();
     animationURL = "assets/login.riv";
+    _initializeRive();
+  }
+
+  Future<void> _initializeRive() async {
+    await RiveFile.initialize();
     rootBundle.load(animationURL).then(
       (data) {
         final file = RiveFile.import(data);
@@ -78,25 +87,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
     numLook?.change(val.length.toDouble());
   }
 
-  void register() {
+  void register() async {
     setState(() {
       isLoading = true;
     });
     isChecking?.change(false);
     isHandsUp?.change(false);
-    if (_emailController.text == "admin" &&
-        _passwordController.text == "admin") {
+    Future<bool> loggedin = authController.loginUser(
+        username: _usernameController.text, password: _passwordController.text);
+    if (await loggedin) {
       successTrigger?.fire();
       Future.delayed(const Duration(seconds: 2), () {
-        // Navigator.push(
-        //     context, MaterialPageRoute(builder: (_) => const DemoScreen()));
+        context.pushNamed('mainpage', pathParameters: {
+          'initialIndex': '0',
+        });
       });
     } else {
       failTrigger?.fire();
     }
+
     setState(() {
       isLoading = false;
     });
+  }
+
+  void error() {
+    failTrigger?.fire();
+    Helper.toast("Please enter valid details");
   }
 
   @override
@@ -119,7 +136,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         fit: BoxFit.fitWidth,
                       ),
                     ),
-                  // const Text("ABCD"),
                   Container(
                     alignment: Alignment.center,
                     width: 400,
@@ -137,7 +153,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             children: [
                               const SizedBox(height: 15),
                               CustomTextField(
-                                controller: _emailController,
+                                controller: _usernameController,
                                 hintText: "Username",
                                 onChanged: () => moveEyeBalls,
                                 prefixIcon: const Icon(Icons.person),
@@ -193,7 +209,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       : ElevatedButton(
                                           onPressed: () {
                                             Helper.validateField(
-                                                            _emailController
+                                                            _usernameController
                                                                 .text) ==
                                                         null &&
                                                     Helper.validateField(
@@ -201,8 +217,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                                 .text) ==
                                                         null
                                                 ? register()
-                                                : Helper.toast(
-                                                    "Please enter valid details");
+                                                : error();
                                           },
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: primaryColor,
@@ -222,10 +237,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   const Text("Already have an account? "),
                                   TextButton(
                                     onPressed: () {
-                                      context.push('/login');
+                                      context.pushNamed('login');
                                     },
                                     child: const Text(
-                                      "Login Now",
+                                      "Login",
                                       style: TextStyle(
                                         color: secondaryColor,
                                       ),
@@ -243,27 +258,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          const Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 50),
-                child: Positioned(
-                    // top: 70,
-                    // right: 20,
-                    // left: 150,
-                    child: AppText(
-                  text: "hCommerce - Register",
-                  size: 20,
-                  color: primaryColor,
-                  fontWeight: FontWeight.bold,
-                )),
+          const Positioned(
+            top: 50,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: AppText(
+                text: "hCommerce - Register",
+                size: 20,
+                color: primaryColor,
+                fontWeight: FontWeight.bold,
               ),
-            ],
+            ),
           ),
         ],
       ),
