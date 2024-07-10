@@ -222,7 +222,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   const Text("Already have an account? "),
                                   TextButton(
                                     onPressed: () {
-                                      context.push('/');
+                                      context.push('/login');
                                     },
                                     child: const Text(
                                       "Login Now",

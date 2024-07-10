@@ -2,7 +2,6 @@ import 'package:animations/animations.dart';
 import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/product_controller.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
-import 'package:ecom_mvvm/presentation/views/main_page.dart';
 import 'package:ecom_mvvm/presentation/views/products/product_details_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/widgets/categories.dart';
 import 'package:ecom_mvvm/presentation/views/products/widgets/image_slider.dart';
@@ -10,6 +9,7 @@ import 'package:ecom_mvvm/presentation/views/products/widgets/product_tile.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -87,13 +87,13 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextButton(
                       onPressed: () {
-                        // context.pushNamed('mainpage', pathParameters: {
-                        //   'index': '1',
-                        // });
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const MainPage(initialIndex: 1);
-                        }));
+                        context.pushNamed('mainpage', pathParameters: {
+                          'initialIndex': '1',
+                        });
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (context) {
+                        //   return const MainPage(initialIndex: 1);
+                        // }));
                       },
                       child: const Text(
                         'View All',
@@ -130,13 +130,13 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextButton(
                       onPressed: () {
-                        // context.pushNamed('mainpage', pathParameters: {
-                        //   'index': '1',
-                        // });
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const MainPage(initialIndex: 1);
-                        }));
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (context) {
+                        //   return const MainPage(initialIndex: 1);
+                        // }));
+                        context.pushNamed('mainpage', pathParameters: {
+                          'initialIndex': '1',
+                        });
                       },
                       child: const Text(
                         'View All',
@@ -173,12 +173,7 @@ class _HomePageState extends State<HomePage> {
                       //         .toString()
                       //   },
                       // );
-                      // Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) {
-                      //   return ProductDetailsScreen(
-                      //     productId: productController.products[index].id,
-                      //   );
-                      // }));
+
                       return OpenContainer(
                         transitionType: ContainerTransitionType.fade,
                         transitionDuration: const Duration(milliseconds: 300),
@@ -206,13 +201,14 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(left: 12, right: 12, top: 5),
                     child: TextButton(
                       onPressed: () {
-                        // context.pushNamed('mainpage', pathParameters: {
-                        //   'index': '1',
-                        // });
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const MainPage(initialIndex: 1);
-                        }));
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (context) {
+                        //   return const MainPage(initialIndex: 1);
+                        // }));
+
+                        context.pushNamed('mainpage', pathParameters: {
+                          'initialIndex': '1',
+                        });
                       },
                       child: const Text(
                         'View All',

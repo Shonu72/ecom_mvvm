@@ -3,6 +3,7 @@ import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
 import 'package:ecom_mvvm/presentation/views/checkout/address.dart';
 import 'package:ecom_mvvm/services/database/database_operation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AddressTile extends StatefulWidget {
   const AddressTile({super.key});
@@ -92,12 +93,13 @@ class _AddressTileState extends State<AddressTile> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AddressPage(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const AddressPage(),
+                      //   ),
+                      // );
+                      context.push('/address');
                     },
                     child: const AppText(
                       text: "Change",

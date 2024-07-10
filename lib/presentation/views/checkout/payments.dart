@@ -1,9 +1,9 @@
 import 'package:ecom_mvvm/core/utils/helpers.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
-import 'package:ecom_mvvm/presentation/views/checkout/order_success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class PaymentHelper {
@@ -40,15 +40,18 @@ class PaymentHelper {
     debugPrint('Payment success');
     Helper.toast("Payment Success: ${response.paymentId!}");
     cartController.clearCart();
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const OrderSuccessScreen()));
+    // Navigator.push(context,
+    //     MaterialPageRoute(builder: (context) => const OrderSuccessScreen()));
+
+    context.push('/ordersuccess');
   }
 
   void handlePaymentError(PaymentFailureResponse response) {
     debugPrint('Payment Failure');
     Helper.toast("Payment Failed: ${response.message!}");
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const OrderFailedScreen()));
+    // Navigator.push(context,
+    //     MaterialPageRoute(builder: (context) => const OrderFailedScreen()));
+    context.push('/orderfailure');
   }
 
   void handleExternalWallet(ExternalWalletResponse response) {

@@ -1,7 +1,7 @@
 import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
-import 'package:ecom_mvvm/presentation/views/main_page.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
 class OrderSuccessScreen extends StatefulWidget {
@@ -62,11 +62,15 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const MainPage(initialIndex: 0)));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) =>
+                      //             const MainPage(initialIndex: 0)));
+
+                      context.pushNamed('mainpage', pathParameters: {
+                        'initialIndex': '0',
+                      });
                     },
                     child: const AppText(
                         text: "Continue Shopping", color: Colors.white),
@@ -136,11 +140,14 @@ class _OrderFailedScreen extends State<OrderFailedScreen> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const MainPage(initialIndex: 0)));
+                      // Navigator.push(
+                      // context,
+                      // MaterialPageRoute(
+                      //     builder: (context) =>
+                      //         const MainPage(initialIndex: 0)));
+                      context.pushNamed('mainpage', pathParameters: {
+                        'initialIndex': '0',
+                      });
                     },
                     child: const AppText(
                         text: "Continue Shopping", color: Colors.white),

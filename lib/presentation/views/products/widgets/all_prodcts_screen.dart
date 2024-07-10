@@ -7,6 +7,7 @@ import 'package:ecom_mvvm/presentation/views/products/widgets/product_tile.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class AllProductScreen extends StatefulWidget {
   const AllProductScreen({super.key});
@@ -214,7 +215,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                     title: const Text("Price: Low to High"),
                     onTap: () {
                       setState(() {
-                        Navigator.pop(context);
+                        context.pop();
                         if (_value == 0) {
                           productController.sortByPrice("aesc");
                         } else {

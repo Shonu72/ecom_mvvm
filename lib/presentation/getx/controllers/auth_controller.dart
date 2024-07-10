@@ -32,4 +32,9 @@ class AuthController extends GetxController {
 
     return failureOrSuccess.isRight() ? true : false;
   }
+
+  Future<void> logOut() async {
+    Helper.saveUser(key: "isLoggedIn", value: false);
+    Helper.saveApiToken(key: '');
+  }
 }

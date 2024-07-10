@@ -2,6 +2,7 @@ import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
 import 'package:ecom_mvvm/presentation/views/checkout/widgets/address_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ShowAddressScreen extends StatelessWidget {
   const ShowAddressScreen({super.key});
@@ -18,7 +19,7 @@ class ShowAddressScreen extends StatelessWidget {
           centerTitle: true,
           leading: IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                context.pop();
               },
               icon: const Icon(
                 Icons.arrow_back_ios,

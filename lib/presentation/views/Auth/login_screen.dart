@@ -3,7 +3,6 @@ import 'package:ecom_mvvm/core/utils/helpers.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/auth_controller.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/custom_textfield.dart';
-import 'package:ecom_mvvm/presentation/views/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -94,14 +93,14 @@ class _LoginScreenState extends State<LoginScreen> {
     if (await loggedin) {
       successTrigger?.fire();
       Future.delayed(const Duration(seconds: 2), () {
-        // context.namedLocation('/mainpage', pathParameters: {
-        //   'index': '0',
-        // });
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const MainPage(
-            initialIndex: 0,
-          );
-        }));
+        context.pushNamed('mainpage', pathParameters: {
+          'initialIndex': '0',
+        });
+        // Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //   return const MainPage(
+        //     initialIndex: 0,
+        //   );
+        // }));
       });
     } else {
       failTrigger?.fire();

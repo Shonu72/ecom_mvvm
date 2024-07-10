@@ -2,7 +2,6 @@ import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
 import 'package:ecom_mvvm/presentation/views/carts/widgets/cart_tile.dart';
-import 'package:ecom_mvvm/presentation/views/checkout/checkout_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -25,7 +24,9 @@ class CartScreen extends StatelessWidget {
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
-              context.pop();
+              context.pushNamed('mainpage', pathParameters: {
+                'initialIndex': '0',
+              });
             },
             icon: const Icon(
               Icons.arrow_back,
@@ -70,9 +71,10 @@ class CartScreen extends StatelessWidget {
                   backgroundColor: WidgetStateProperty.all(primaryColor),
                 ),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const CheckoutPage();
-                  }));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  //   return const CheckoutPage();
+                  // }));
+                  context.push('/checkout');
                 },
                 child: const AppText(
                   text: 'Checkout',

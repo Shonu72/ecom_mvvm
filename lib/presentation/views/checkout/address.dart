@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/core/utils/helpers.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
-import 'package:ecom_mvvm/presentation/views/checkout/checkout_page.dart';
 import 'package:ecom_mvvm/services/database/database_operation.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -286,10 +285,12 @@ class _AddressPageState extends State<AddressPage> {
                 }
 
                 Helper.toast('Address Saved');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const CheckoutPage()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => const CheckoutPage()),
+                // );
+                // ignore: use_build_context_synchronously
+                context.push('/checkout');
               },
               child: const AppText(
                 text: 'Save Address',

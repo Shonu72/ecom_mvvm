@@ -1,11 +1,11 @@
 import 'package:ecom_mvvm/core/themes/colors.dart';
+import 'package:ecom_mvvm/presentation/getx/controllers/auth_controller.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/user_controller.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
-import 'package:ecom_mvvm/presentation/views/Profiles/payment_method.dart';
 import 'package:ecom_mvvm/presentation/views/Profiles/profile_widget.dart';
-import 'package:ecom_mvvm/presentation/views/Profiles/show_address_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -16,6 +16,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final UserController userController = Get.find<UserController>();
+  final AuthController authController = Get.find<AuthController>();
 
   @override
   void initState() {
@@ -38,7 +39,11 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         centerTitle: true,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.pushNamed('mainpage', pathParameters: {
+                'initialIndex': '0',
+              });
+            },
             icon: const Icon(
               Icons.arrow_back_ios,
               color: primaryColor,
@@ -91,12 +96,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   title: 'Shipping Addresses',
                   subtitle: 'show saved addresses',
                   ontap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ShowAddressScreen(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const ShowAddressScreen(),
+                    //   ),
+                    // );
+                    context.push('/showaddress');
                   },
                 ),
                 const SizedBox(height: 10),
@@ -104,12 +110,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   title: 'Payment Methods',
                   subtitle: 'saved payment system ',
                   ontap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ShowCardScreen(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const ShowCardScreen(),
+                    //   ),
+                    // );
+                    context.push('/showcardscreen');
                   },
                 ),
                 const SizedBox(height: 10),
@@ -129,6 +136,15 @@ class _ProfilePageState extends State<ProfilePage> {
                   title: 'Settings',
                   subtitle: 'Notification, Password..',
                   ontap: () {},
+                ),
+                const SizedBox(height: 10),
+                ProfileWidget(
+                  title: 'LogOut',
+                  subtitle: 'you\'ll have to login again',
+                  ontap: () {
+                    authController.logOut();
+                    context.go('/');
+                  },
                 ),
                 const SizedBox(height: 10),
               ],

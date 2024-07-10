@@ -21,7 +21,9 @@ class WishlistScreen extends StatelessWidget {
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
-              context.pop();
+              context.pushNamed('mainpage', pathParameters: {
+                'initialIndex': '0',
+              });
             },
             icon: const Icon(
               Icons.arrow_back,

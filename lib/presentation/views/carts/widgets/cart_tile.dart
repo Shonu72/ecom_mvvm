@@ -2,10 +2,9 @@ import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/data/models/product_model.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/product_controller.dart';
-import 'package:ecom_mvvm/presentation/views/checkout/checkout_page.dart';
-import 'package:ecom_mvvm/presentation/views/products/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 class CartTile extends StatelessWidget {
   final ProductModel product;
@@ -36,20 +35,20 @@ class CartTile extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ProductDetailsScreen(
-                                        productId: productController.products
-                                            .firstWhere(
-                                                (p) => p.id == product.id)
-                                            .id,
-                                      )));
-                          // GoRouter.of(context)
-                          //     .pushNamed('productdetails', pathParameters: {
-                          //   "productId":
-                          //       "${productController.products.firstWhere((p) => p.id == product.id).id}"
-                          // });
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => ProductDetailsScreen(
+                          //               productId: productController.products
+                          //                   .firstWhere(
+                          //                       (p) => p.id == product.id)
+                          //                   .id,
+                          //             )));
+                          GoRouter.of(context)
+                              .pushNamed('productdetails', pathParameters: {
+                            "productId":
+                                "${productController.products.firstWhere((p) => p.id == product.id).id}"
+                          });
                         },
                         child: Image.network(
                           product.image,
@@ -126,12 +125,12 @@ class CartTile extends StatelessWidget {
                             ),
                             onPressed: () {
                               // context.push('/checkout');
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CheckoutPage()));
-                              // context.pushNamed('checkout');
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             const CheckoutPage()));
+                              context.push('/checkout');
                             },
                             child: const Text(
                               'Buy Now',
