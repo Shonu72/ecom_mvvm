@@ -21,6 +21,7 @@ class Helper {
     );
   }
 
+// save user data in local storage
   static saveUser({required String key, required bool value}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool(key, value);
@@ -36,6 +37,7 @@ class Helper {
     return prefs.getBool(key);
   }
 
+// validation
   static validateField(String value) {
     if (value.isEmpty || value == 'null') {
       return "field required";
@@ -43,6 +45,7 @@ class Helper {
     return null;
   }
 
+// send request to server
   static Future<Response> sendRequest(RequestType type, String endpoint,
       {Map<String, dynamic>? data}) async {
     final dio = Dio();
@@ -87,6 +90,7 @@ class Helper {
     }
   }
 
+// handle error
   static String convertFailureToMessage(Failure failure) {
     if (failure is ServerFailure) {
       return failure.message;
@@ -94,6 +98,7 @@ class Helper {
     return "Unknown error occurred";
   }
 
+// request permission
   static Future<void> requestPermissions() async {
     Map<Permission, PermissionStatus> statuses = await [
       Permission.location,

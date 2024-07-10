@@ -1,7 +1,9 @@
 import 'package:ecom_mvvm/core/themes/colors.dart';
 import 'package:ecom_mvvm/data/models/product_model.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
+import 'package:ecom_mvvm/presentation/getx/controllers/product_controller.dart';
 import 'package:ecom_mvvm/presentation/views/checkout/checkout_page.dart';
+import 'package:ecom_mvvm/presentation/views/products/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +19,7 @@ class CartTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CartController cartController = Get.find<CartController>();
+    final productController = Get.find<ProductController>();
 
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
@@ -31,10 +34,28 @@ class CartTile extends StatelessWidget {
                 Expanded(
                   child: Column(
                     children: [
-                      Image.network(
-                        product.image,
-                        height: 200,
-                        width: 200,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProductDetailsScreen(
+                                        productId: productController.products
+                                            .firstWhere(
+                                                (p) => p.id == product.id)
+                                            .id,
+                                      )));
+                          // GoRouter.of(context)
+                          //     .pushNamed('productdetails', pathParameters: {
+                          //   "productId":
+                          //       "${productController.products.firstWhere((p) => p.id == product.id).id}"
+                          // });
+                        },
+                        child: Image.network(
+                          product.image,
+                          height: 200,
+                          width: 200,
+                        ),
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -110,6 +131,7 @@ class CartTile extends StatelessWidget {
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           const CheckoutPage()));
+                              // context.pushNamed('checkout');
                             },
                             child: const Text(
                               'Buy Now',

@@ -7,6 +7,7 @@ import 'package:ecom_mvvm/presentation/views/main_page.dart';
 import 'package:ecom_mvvm/presentation/views/products/home_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/product_details_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/widgets/all_prodcts_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
@@ -38,7 +39,7 @@ final router = GoRouter(
           path: '/mainpage:/index',
           builder: (context, state) {
             final initialIndex =
-                int.parse(state.queryParameters['index'] ?? '0');
+                int.parse(state.pathParameters['index'] ?? '0');
             return MainPage(initialIndex: initialIndex);
           }),
       GoRoute(
@@ -48,10 +49,13 @@ final router = GoRouter(
       ),
       GoRoute(
         name: 'productdetails',
-        path: '/productdetails/:id',
-        builder: (context, state) {
-          final id = int.parse(state.pathParameters['id']!);
-          return ProductDetailsScreen(productId: id);
+        path: '/productdetails/:productId',
+        builder: (BuildContext context, GoRouterState state) {
+          // final ProductModel id = state.extra as ProductModel;
+          // final id = int.parse(state.pathParameters['productId']!);
+          return ProductDetailsScreen(
+            productId: int.parse(state.pathParameters['productId']!),
+          );
         },
       ),
       GoRoute(
@@ -64,7 +68,7 @@ final router = GoRouter(
       GoRoute(
         name: 'address',
         path: '/address',
-        builder: (context, state) =>  AddressPage(),
+        builder: (context, state) => const AddressPage(),
       ),
       GoRoute(
         name: 'checkout',

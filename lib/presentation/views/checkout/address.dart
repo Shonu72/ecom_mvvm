@@ -8,6 +8,7 @@ import 'package:ecom_mvvm/services/database/database_operation.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AddressPage extends StatefulWidget {
@@ -70,7 +71,8 @@ class _AddressPageState extends State<AddressPage> {
               TextButton(
                 child: const Text('Cancel'),
                 onPressed: () {
-                  Navigator.of(context).pop(false);
+                  context.pop();
+                  Navigator.of(context).pop(true);
                 },
               ),
               TextButton(

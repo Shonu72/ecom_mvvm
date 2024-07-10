@@ -3,6 +3,7 @@ import 'package:ecom_mvvm/data/models/card_model.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
 import 'package:ecom_mvvm/services/cards/cards.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ShowCardScreen extends StatefulWidget {
   const ShowCardScreen({super.key});
@@ -33,7 +34,9 @@ class ShowCardScreenState extends State<ShowCardScreen> {
           ),
           centerTitle: true,
           leading: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                context.pop();
+              },
               icon: const Icon(
                 Icons.arrow_back_ios,
                 color: primaryColor,

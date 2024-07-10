@@ -1,4 +1,5 @@
 import 'package:ecom_mvvm/core/themes/colors.dart';
+import 'package:ecom_mvvm/core/utils/helpers.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/product_controller.dart';
 import 'package:ecom_mvvm/presentation/views/Auth/widgets/app_text.dart';
@@ -26,7 +27,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // productController.productDetails(widget.productId);
     final product = productController.products.firstWhere(
       (p) => p.id == widget.productId,
     );
@@ -191,6 +191,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               ),
                               onPressed: () {
                                 cartController.addToCart(product);
+                                Helper.toast('Product added to cart');
                               },
                               child: const Text(
                                 "Add to Cart",

@@ -19,7 +19,7 @@ class UserController extends GetxController {
         (failure) {
           errorMessage.value = Helper.convertFailureToMessage(failure);
           debugPrint('Error: ${errorMessage.value}');
-          Helper.toast(errorMessage.value);
+          // Helper.toast(errorMessage.value);
         },
         (success) {
           userResponse.value = success;
@@ -29,7 +29,7 @@ class UserController extends GetxController {
     } catch (e) {
       errorMessage.value = 'Unexpected error: $e';
       debugPrint('Catch error: ${errorMessage.value}');
-      Helper.toast(errorMessage.value);
+      // Helper.toast(errorMessage.value);
     }
   }
 }

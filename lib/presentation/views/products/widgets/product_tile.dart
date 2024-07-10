@@ -1,4 +1,5 @@
 import 'package:ecom_mvvm/core/themes/colors.dart';
+import 'package:ecom_mvvm/core/utils/helpers.dart';
 import 'package:ecom_mvvm/data/models/product_model.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/cart_controller.dart';
 import 'package:ecom_mvvm/presentation/getx/controllers/product_controller.dart';
@@ -99,6 +100,7 @@ class ProductTile extends StatelessWidget {
                     ),
                     onPressed: () {
                       cartController.addToCart(product);
+                      Helper.toast('Product added to cart');
                     },
                     child: const Text(
                       "Add to Cart",

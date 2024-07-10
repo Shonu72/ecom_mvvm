@@ -25,7 +25,7 @@ class _MainPageState extends State<MainPage> {
     const AllProductScreen(),
     const CartScreen(),
     WishlistScreen(),
-    ProfilePage(),
+    const ProfilePage(),
   ];
 
   @override
