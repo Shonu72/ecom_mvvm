@@ -54,102 +54,99 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Obx(
           () {
             final user = userController.userResponse.value;
-
-            // if (user == null) {
-            //   return const Center(child: CircularProgressIndicator());
-            // }
-
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(height: 20),
-                ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20),
+                  ListTile(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    tileColor: Colors.white,
+                    title: AppText(
+                      text: user?.username ?? 'mor_2314',
+                      size: 20,
+                      color: Colors.black,
+                    ),
+                    subtitle: AppText(
+                      text: user?.email ?? 'morrison@gmail.com',
+                      size: 16,
+                      color: Colors.black,
+                    ),
+                    leading: const CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Colors.black,
+                      backgroundImage: NetworkImage(
+                          'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg'),
+                    ),
                   ),
-                  tileColor: Colors.white,
-                  title: AppText(
-                    text: user?.username ?? 'mor_2314',
-                    size: 20,
-                    color: Colors.black,
+                  const SizedBox(height: 30),
+                  ProfileWidget(
+                    title: 'My Orders',
+                    subtitle: 'all orders',
+                    ontap: () {
+                      context.push('/orders');
+                    },
                   ),
-                  subtitle: AppText(
-                    text: user?.email ?? 'morrison@gmail.com',
-                    size: 16,
-                    color: Colors.black,
+                  const SizedBox(height: 10),
+                  ProfileWidget(
+                    title: 'Shipping Addresses',
+                    subtitle: 'show saved addresses',
+                    ontap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const ShowAddressScreen(),
+                      //   ),
+                      // );
+                      context.push('/showaddress');
+                    },
                   ),
-                  leading: const CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.black,
-                    backgroundImage: NetworkImage(
-                        'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg'),
+                  const SizedBox(height: 10),
+                  ProfileWidget(
+                    title: 'Payment Methods',
+                    subtitle: 'saved payment system ',
+                    ontap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const ShowCardScreen(),
+                      //   ),
+                      // );
+                      context.push('/showcardscreen');
+                    },
                   ),
-                ),
-                const SizedBox(height: 30),
-                ProfileWidget(
-                  title: 'My Orders',
-                  subtitle: 'all orders',
-                  ontap: () {
-                    context.push('/orders');
-                  },
-                ),
-                const SizedBox(height: 10),
-                ProfileWidget(
-                  title: 'Shipping Addresses',
-                  subtitle: 'show saved addresses',
-                  ontap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const ShowAddressScreen(),
-                    //   ),
-                    // );
-                    context.push('/showaddress');
-                  },
-                ),
-                const SizedBox(height: 10),
-                ProfileWidget(
-                  title: 'Payment Methods',
-                  subtitle: 'saved payment system ',
-                  ontap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => const ShowCardScreen(),
-                    //   ),
-                    // );
-                    context.push('/showcardscreen');
-                  },
-                ),
-                const SizedBox(height: 10),
-                ProfileWidget(
-                  title: 'Promocode & Offers',
-                  subtitle: 'show latest promo codes',
-                  ontap: () {},
-                ),
-                const SizedBox(height: 10),
-                ProfileWidget(
-                  title: 'My Reviews',
-                  subtitle: 'all reviews',
-                  ontap: () {},
-                ),
-                const SizedBox(height: 10),
-                ProfileWidget(
-                  title: 'Settings',
-                  subtitle: 'Notification, Password..',
-                  ontap: () {},
-                ),
-                const SizedBox(height: 10),
-                ProfileWidget(
-                  title: 'LogOut',
-                  subtitle: 'you\'ll have to login again',
-                  ontap: () {
-                    authController.logOut();
-                    context.go('/');
-                  },
-                ),
-                const SizedBox(height: 10),
-              ],
+                  const SizedBox(height: 10),
+                  ProfileWidget(
+                    title: 'Promocode & Offers',
+                    subtitle: 'show latest promo codes',
+                    ontap: () {},
+                  ),
+                  const SizedBox(height: 10),
+                  ProfileWidget(
+                    title: 'My Reviews',
+                    subtitle: 'all reviews',
+                    ontap: () {},
+                  ),
+                  const SizedBox(height: 10),
+                  ProfileWidget(
+                    title: 'Settings',
+                    subtitle: 'Notification, Password..',
+                    ontap: () {},
+                  ),
+                  const SizedBox(height: 10),
+                  ProfileWidget(
+                    title: 'LogOut',
+                    subtitle: 'you\'ll have to login again',
+                    ontap: () {
+                      authController.logOut();
+                      context.go('/');
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                ],
+              ),
             );
           },
         ),

@@ -6,6 +6,7 @@ import 'package:ecom_mvvm/presentation/views/products/product_details_screen.dar
 import 'package:ecom_mvvm/presentation/views/products/widgets/categories.dart';
 import 'package:ecom_mvvm/presentation/views/products/widgets/image_slider.dart';
 import 'package:ecom_mvvm/presentation/views/products/widgets/product_tile.dart';
+import 'package:ecom_mvvm/presentation/views/products/widgets/search_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -51,7 +52,13 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate:
+                      MySearchDelegate(productList: productController.products),
+                );
+              },
               icon: const Icon(
                 Icons.search,
                 size: 30,

@@ -135,7 +135,7 @@ class _AddressPageState extends State<AddressPage> {
   Widget renderMap() {
     // late GoogleMapController controller;
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.65,
+      height: MediaQuery.of(context).size.height * 0.63,
       width: MediaQuery.of(context).size.width,
       child: loadingMap
           ? const Center(
@@ -169,9 +169,9 @@ class _AddressPageState extends State<AddressPage> {
   Widget backButton() {
     return IconButton(
       onPressed: () {
-        Navigator.pop(context);
+        context.pop();
       },
-      color: Colors.black87,
+      color: primaryColor,
       icon: const Icon(Icons.arrow_back),
     );
   }
@@ -201,104 +201,107 @@ class _AddressPageState extends State<AddressPage> {
   }
 
   Widget addressDetailsCard() {
-    return Card(
-      color: secondaryColor,
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Row(
-              children: [
-                const Icon(
-                  Icons.location_on,
-                  color: primaryColor,
-                  size: 32,
+    return SingleChildScrollView(
+      child: Card(
+        color: secondaryColor,
+        elevation: 2,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    Icons.location_on,
+                    color: primaryColor,
+                    size: 32,
+                  ),
+                  const SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          AppText(
+                            text: "$addressTitle, $city",
+                            color: Colors.black,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          AppText(
+                            text: "$locality, $state",
+                            color: Colors.black,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          AppText(
+                            text: "$pincode, $country",
+                            color: Colors.black,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: primaryColor,
+                  fixedSize: Size(MediaQuery.of(context).size.width, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    // side: const BorderSide(color: primaryColor),
+                  ),
                 ),
-                const SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        AppText(
-                          text: "$addressTitle, $city",
-                          color: Colors.black,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        AppText(
-                          text: "$locality, $state",
-                          color: Colors.black,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        AppText(
-                          text: "$pincode, $country",
-                          color: Colors.black,
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor,
-                fixedSize: Size(MediaQuery.of(context).size.width, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  // side: const BorderSide(color: primaryColor),
+                onPressed: () async {
+                  final existingAddresses =
+                      await _databaseService.getAddresses();
+
+                  if (existingAddresses.isNotEmpty) {
+                    // Address already exists, update it
+                    await _databaseService.updateAddress({
+                      'id': existingAddresses.first['id'],
+                      'addressTitle': addressTitle,
+                      'locality': locality,
+                      'city': city,
+                      'state': state,
+                      'pincode': pincode,
+                      'country': country,
+                    });
+                  } else {
+                    // Address does not exist, insert it
+                    await _databaseService.insertAddress({
+                      'addressTitle': addressTitle,
+                      'locality': locality,
+                      'city': city,
+                      'state': state,
+                      'pincode': pincode,
+                      'country': country,
+                    });
+                  }
+
+                  Helper.toast('Address Saved');
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => const CheckoutPage()),
+                  // );
+                  // ignore: use_build_context_synchronously
+                  context.push('/checkout');
+                },
+                child: const AppText(
+                  text: 'Save Address',
+                  color: Colors.white,
+                  size: 16,
                 ),
               ),
-              onPressed: () async {
-                final existingAddresses = await _databaseService.getAddresses();
-
-                if (existingAddresses.isNotEmpty) {
-                  // Address already exists, update it
-                  await _databaseService.updateAddress({
-                    'id': existingAddresses.first['id'],
-                    'addressTitle': addressTitle,
-                    'locality': locality,
-                    'city': city,
-                    'state': state,
-                    'pincode': pincode,
-                    'country': country,
-                  });
-                } else {
-                  // Address does not exist, insert it
-                  await _databaseService.insertAddress({
-                    'addressTitle': addressTitle,
-                    'locality': locality,
-                    'city': city,
-                    'state': state,
-                    'pincode': pincode,
-                    'country': country,
-                  });
-                }
-
-                Helper.toast('Address Saved');
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => const CheckoutPage()),
-                // );
-                // ignore: use_build_context_synchronously
-                context.push('/checkout');
-              },
-              child: const AppText(
-                text: 'Save Address',
-                color: Colors.white,
-                size: 16,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

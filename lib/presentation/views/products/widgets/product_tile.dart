@@ -36,7 +36,7 @@ class ProductTile extends StatelessWidget {
                     child: Image.network(
                       product.image,
                       height: 130,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                       width: double.maxFinite,
                     ),
                   ),

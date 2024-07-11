@@ -16,7 +16,7 @@ class ProductBinding extends Bindings {
     final fetchByCategoryUsecase = Get.find<FetchByCategoryUsecase>();
     final sortByPriceUsecase = Get.find<SortByPriceUsecase>();
     final sortByCateogoryPriceUsecase = Get.find<SortByCateogryPriceUsecase>();
-
+                  
     Get.lazyPut(
       () => ProductController(
         getProductUsecase: productUseCase,

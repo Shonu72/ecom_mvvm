@@ -4,6 +4,7 @@ import 'package:ecom_mvvm/presentation/getx/controllers/product_controller.dart'
 import 'package:ecom_mvvm/presentation/views/products/product_details_screen.dart';
 import 'package:ecom_mvvm/presentation/views/products/widgets/categories.dart';
 import 'package:ecom_mvvm/presentation/views/products/widgets/product_tile.dart';
+import 'package:ecom_mvvm/presentation/views/products/widgets/search_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -54,10 +55,11 @@ class AllProductScreenState extends State<AllProductScreen> {
             padding: const EdgeInsets.only(right: 8),
             child: IconButton(
               onPressed: () {
-                // showSearch(
-                //   context: context,
-                //   delegate: MySearchDelegate(),
-                // );
+                showSearch(
+                  context: context,
+                  delegate:
+                      MySearchDelegate(productList: productController.products),
+                );
               },
               icon: const Icon(
                 Icons.search,
