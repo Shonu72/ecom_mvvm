@@ -17,7 +17,7 @@ import 'package:go_router/go_router.dart';
 final router = GoRouter(
     redirect: (context, state) async {
       bool? isLoggedIn = await Helper.getUser(key: 'isLoggedIn');
-      int initialIndex = 0; // Replace 0 with your dynamic value
+      int initialIndex = 0;
       if (isLoggedIn == true && state.uri.toString() == '/') {
         return '/mainpage/$initialIndex';
       } else if (isLoggedIn == false && state.uri.toString() != '/') {

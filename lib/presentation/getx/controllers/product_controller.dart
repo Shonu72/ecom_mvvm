@@ -44,7 +44,7 @@ class ProductController extends GetxController {
         Helper.toast(errorMessage.value);
       }, (success) {
         products.value = success['products'];
-        debugPrint('Products loaded: ${products.value}');
+        debugPrint('Products loaded: $products');
       });
     } catch (e) {
       errorMessage.value = 'Unexpected error: $e';
@@ -72,7 +72,7 @@ class ProductController extends GetxController {
       }, (success) {
         products.value = success['products'];
         isLoading(false);
-        debugPrint('Products loaded: ${products.value}');
+        debugPrint('Products loaded: $products');
       });
     } catch (e) {
       errorMessage.value = 'Unexpected error: $e';
@@ -100,7 +100,7 @@ class ProductController extends GetxController {
       }, (success) {
         products.value = success['products'];
         isLoading(false);
-        debugPrint('Products loaded: ${products.value}');
+        debugPrint('Products loaded: $products');
       });
     } catch (e) {
       errorMessage.value = 'Unexpected error: $e';
@@ -126,7 +126,7 @@ class ProductController extends GetxController {
       }, (success) {
         products.value = success['products'];
         isLoading(false);
-        debugPrint('Products loaded: ${products.value}');
+        debugPrint('Products loaded: $products');
       });
     } catch (e) {
       errorMessage.value = 'Unexpected error: $e';
@@ -153,7 +153,7 @@ class ProductController extends GetxController {
       }, (success) {
         products.value = success['products'];
         isLoading(false);
-        debugPrint('Products loaded: ${products.value}');
+        debugPrint('Products loaded: $products');
       });
     } catch (e) {
       errorMessage.value = 'Unexpected error: $e';

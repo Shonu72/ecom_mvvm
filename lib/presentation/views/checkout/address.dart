@@ -95,11 +95,15 @@ class _AddressPageState extends State<AddressPage> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
+        Helper.toast('Location permissions are denied');
         return Future.error('Location permissions are denied');
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
+      Helper.toast(
+          'Location permissions are permanently denied, we cannot request permissions.');
+
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }

@@ -60,64 +60,66 @@ class _MainPageState extends State<MainPage> {
           topLeft: Radius.circular(30.0),
           topRight: Radius.circular(30.0),
         ),
-        child: Obx(() => BottomNavigationBar(
-              selectedFontSize: 16,
-              unselectedFontSize: 14,
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: Colors.white,
-              onTap: onTap,
-              currentIndex: currentIndex,
-              selectedItemColor: primaryColor,
-              unselectedItemColor: secondaryColor,
-              showSelectedLabels: true,
-              showUnselectedLabels: true,
-              selectedLabelStyle: const TextStyle(color: primaryColor),
-              unselectedLabelStyle: const TextStyle(color: secondaryColor),
-              elevation: 0,
-              items: [
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.home_outlined), label: "Home"),
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.window_outlined), label: "Categories"),
-                BottomNavigationBarItem(
-                  icon: Stack(
-                    children: [
-                      const Icon(Icons.shopping_cart_outlined),
-                      if (cartController.count > 0)
-                        Positioned(
-                          right: -4,
-                          top: -4,
-                          child: Container(
-                            padding: const EdgeInsets.all(1),
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(6),
+        child: Obx(
+          () => BottomNavigationBar(
+            selectedFontSize: 16,
+            unselectedFontSize: 14,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.white,
+            onTap: onTap,
+            currentIndex: currentIndex,
+            selectedItemColor: primaryColor,
+            unselectedItemColor: secondaryColor,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            selectedLabelStyle: const TextStyle(color: primaryColor),
+            unselectedLabelStyle: const TextStyle(color: secondaryColor),
+            elevation: 0,
+            items: [
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.home_outlined), label: "Home"),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.window_outlined), label: "Categories"),
+              BottomNavigationBarItem(
+                icon: Stack(
+                  children: [
+                    const Icon(Icons.shopping_cart_outlined),
+                    if (cartController.count > 0)
+                      Positioned(
+                        right: -4,
+                        top: -4,
+                        child: Container(
+                          padding: const EdgeInsets.all(1),
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          constraints: const BoxConstraints(
+                            minWidth: 18,
+                            minHeight: 18,
+                          ),
+                          child: Text(
+                            '${cartController.count}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
                             ),
-                            constraints: const BoxConstraints(
-                              minWidth: 18,
-                              minHeight: 18,
-                            ),
-                            child: Text(
-                              '${cartController.count}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
-                    ],
-                  ),
-                  label: "Cart",
+                      ),
+                  ],
                 ),
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.favorite_border_outlined),
-                    label: "Wishlist"),
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.person), label: "Profile"),
-              ],
-            )),
+                label: "Cart",
+              ),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite_border_outlined),
+                  label: "Wishlist"),
+              const BottomNavigationBarItem(
+                  icon: Icon(Icons.person), label: "Profile"),
+            ],
+          ),
+        ),
       ),
     );
   }

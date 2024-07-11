@@ -17,12 +17,15 @@ class OrderController extends GetxController {
     orders.add(order);
     saveOrders();
   }
+  // order quantity from the cart
+  
 
   Future<void> saveOrders() async {
     final prefs = await SharedPreferences.getInstance();
     final orderData = orders.map((order) => order.toMap()).toList();
     await prefs.setString('orders', jsonEncode(orderData));
   }
+  
 
   Future<void> loadOrders() async {
     final prefs = await SharedPreferences.getInstance();

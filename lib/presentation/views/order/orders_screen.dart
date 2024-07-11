@@ -73,7 +73,8 @@ class OrdersScreen extends StatelessWidget {
                         children: [
                           Text('Price: \$${product.price.toStringAsFixed(2)}'),
                           Text(
-                              'Quantity: ${orderController.orders[index].products.where((p) => p.id == product.id).length}'),
+                            'Quantity: ${orderController.orders[index].products.where((p) => p.id == product.id).length}',
+                          ),
                         ],
                       ),
                     );

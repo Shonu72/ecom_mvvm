@@ -24,9 +24,11 @@ class ProductDatasourceImpl implements ProductDataSource {
         }
         return Right({'products': products});
       } else {
-        return Left(ServerFailure(
-            message: response.data['message'] ??
-                'Server error with status code: ${response.statusCode}'));
+        return Left(
+          ServerFailure(
+              message: response.data['message'] ??
+                  'Server error with status code: ${response.statusCode}'),
+        );
       }
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message!));
@@ -45,9 +47,11 @@ class ProductDatasourceImpl implements ProductDataSource {
         final product = ProductModel.fromMap(response.data);
         return Right({'product': product});
       } else {
-        return Left(ServerFailure(
-            message: response.data['message'] ??
-                'Server error with status code: ${response.statusCode}'));
+        return Left(
+          ServerFailure(
+              message: response.data['message'] ??
+                  'Server error with status code: ${response.statusCode}'),
+        );
       }
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message!));
@@ -69,9 +73,11 @@ class ProductDatasourceImpl implements ProductDataSource {
         }
         return Right({'products': products});
       } else {
-        return Left(ServerFailure(
-            message: response.data['message'] ??
-                'Server error with status code: ${response.statusCode}'));
+        return Left(
+          ServerFailure(
+              message: response.data['message'] ??
+                  'Server error with status code: ${response.statusCode}'),
+        );
       }
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message!));
@@ -93,9 +99,11 @@ class ProductDatasourceImpl implements ProductDataSource {
         }
         return Right({'products': products});
       } else {
-        return Left(ServerFailure(
-            message: response.data['message'] ??
-                'Server error with status code: ${response.statusCode}'));
+        return Left(
+          ServerFailure(
+              message: response.data['message'] ??
+                  'Server error with status code: ${response.statusCode}'),
+        );
       }
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message!));
@@ -117,14 +125,18 @@ class ProductDatasourceImpl implements ProductDataSource {
         }
         return Right({'products': products});
       } else {
-        return Left(ServerFailure(
-            message: response.data['message'] ??
-                'Server error with status code: ${response.statusCode}'));
+        return Left(
+          ServerFailure(
+              message: response.data['message'] ??
+                  'Server error with status code: ${response.statusCode}'),
+        );
       }
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message!));
     } catch (e) {
-      return Left(ServerFailure(message: 'Unexpected error: $e'));
+      return Left(
+        ServerFailure(message: 'Unexpected error: $e'),
+      );
     }
   }
 }
