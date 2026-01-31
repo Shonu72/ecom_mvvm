@@ -98,9 +98,12 @@ class _LoginScreenState extends State<LoginScreen> {
     if (await loggedin) {
       successTrigger?.fire();
       Future.delayed(const Duration(seconds: 2), () {
-        context.pushNamed('mainpage', pathParameters: {
-          'initialIndex': '0',
-        });
+        debugPrint('Navigating to main page');
+        if (mounted) {
+          context.pushNamed('mainpage', pathParameters: {
+            'initialIndex': '0',
+          });
+        }
       });
     } else {
       failTrigger?.fire();
@@ -118,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffd6e2ea),
+      backgroundColor: bgColor,
       body: Stack(
         children: [
           Center(
@@ -153,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               const SizedBox(height: 15),
                               CustomTextField(
                                 controller: _usernameController,
-                                hintText: "Username",
+                                hintText: "Enter Username",
                                 onChanged: () => moveEyeBalls,
                                 prefixIcon: const Icon(Icons.person),
                                 obscureText: false,
